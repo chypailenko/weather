@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:400,700');
+
+.text {
+
+  &--16 {
+    font-size: rem(16px);
+  }
+  &--24 {
+    font-size: rem(24px);
+  }
+  &--64 {
+    font-size: rem(64px);
+  }
+
+  &--bold {
+    font-weight: 700;
+  }
+  &--uppercase {
+    text-transform: uppercase;
+  }
+}

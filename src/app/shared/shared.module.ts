@@ -6,6 +6,7 @@ import {BtnComponent} from './btn/btn.component';
     BtnComponent
   ],
   exports: [
+    BtnComponent
   ]
 })
 export class SharedModule {}
