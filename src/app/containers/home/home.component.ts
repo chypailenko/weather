@@ -1,4 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Observable} from 'rxjs';
+import {DataService} from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,14 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class HomeComponent implements OnInit {
   @Output() click: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  capitals$: any;
+
+  constructor(private data: DataService) { }
 
   ngOnInit() {
+    this.data.getCapitals().subscribe(
+      data => this.capitals$ = data
+    );
   }
 
   add() {

@@ -2,16 +2,19 @@
   <div class="home container">
     <h1 class="home__title text--64">Pick some Place For Weekend</h1>
     <div class="weather">
-      <div class="weather__header">
-          <div class="weather__value text--24 text--bold">Visited/want visit</div>
-          <div class="weather__value text--24 text--bold">Capitals</div>
-          <div class="weather__value text--24 text--bold">Temperature</div>
-        <div class="weather__value text--24 text--bold">Actions</div>
+      <div class="weather__header row">
+          <div class="weather__value row__item text--24 text--bold">Visited/want visit</div>
+          <div class="weather__value row__item text--24 text--bold">Capitals</div>
+          <div class="weather__value row__item text--24 text--bold">Temperature</div>
+        <div class="weather__value row__item text--24 text--bold">Actions</div>
       </div>
 
-      <div class="row">
-          <div class="row__item text--16">select</div>
-        <div class="row__item text--16">London</div>
+      <div class="row" *ngFor="let capital of capitals$ | keyvalue">
+        <div class="row__item text--16">select</div>
+        <div class="row__item text--16">
+          <!--{{capital}}-->
+          {{capital.value.capital}}
+        </div>
         <div class="row__item text--16">35C</div>
         <div class="row__item text--16">
           <app-btn (click)="edit($event)" class="button button--primary">Edit</app-btn>
