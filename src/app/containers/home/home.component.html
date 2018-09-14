@@ -10,7 +10,11 @@
       </div>
 
       <div class="row" *ngFor="let capital of capitals$ | keyvalue">
-        <div class="row__item text--16">select</div>
+        <div class="row__item text--16">
+          <select>
+              <option value="volvo">visit</option>
+              <option value="saab">want visit</option>
+        </select></div>
         <div class="row__item text--16">
           <!--{{capital}}-->
           {{capital.value.capital}}
