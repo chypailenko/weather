@@ -11,26 +11,30 @@ export class HomeComponent implements OnInit {
   @Output() click: EventEmitter<any> = new EventEmitter();
 
   capitals$: any;
+  capitalsArray: any;
+
   constructor(private data: DataService) { }
 
   ngOnInit() {
     this.data.getCapitals().subscribe(
       data => this.capitals$ = data
     );
+
+    this.getWeather(this.capitals$);
   }
 
-   getWeather = async(obj) => {
 
-    this.capitals$ = Object.values(obj);
+   async getWeather(obj) {
+      console.log(obj);
 
-    console.log(this.capitals$);
+    this.capitalsArray = Object.values(obj);
 
-    for (const capital of this.capitals$) {
+    for (const capital of this.capitalsArray) {
       const weatherPromise = await fetch(
         `https://api.darksky.net/forecast/73b864c657473b7ce57d7471f599a2b9/${capital.lat},${capital.long}`);
-      const capitalWeather = await weatherPromise.json();
-      capital.weather = capitalWeather;
+        capital.weather = await weatherPromise.json();
     }
+    console.log(this.capitalsArray);
   }
 
   add() {
