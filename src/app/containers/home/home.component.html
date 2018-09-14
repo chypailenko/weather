@@ -9,7 +9,10 @@
         <div class="weather__value row__item text--24 text--bold">Actions</div>
       </div>
 
-      <div class="row" *ngFor="let capital of capitals$ | keyvalue">
+
+      <app-weather-temperature [data]="weatherOfCapital$ | async"></app-weather-temperature>
+
+      <div class="row" *ngFor="let item of (capitals$ | async)" (click)="getWeather(item)">
         <div class="row__item text--16">
           <select>
               <option value="volvo">visit</option>
@@ -17,7 +20,7 @@
         </select></div>
         <div class="row__item text--16">
           <!--{{capital}}-->
-          {{capital.value.capital}}
+          {{item.capital}}
         </div>
         <div class="row__item text--16">35C</div>
         <div class="row__item text--16">

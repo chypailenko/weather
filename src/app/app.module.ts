@@ -8,11 +8,13 @@ import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './app-routing.module';
 
 import * as fromContainers from './containers';
+import * as fromComponents from './components';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ...fromContainers.containers
+    ...fromContainers.containers,
+    ...fromComponents.components
   ],
   imports: [
     BrowserModule,

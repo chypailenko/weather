@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs';
 import {DataService} from '../../shared/services/data.service';
+import {Capital, Coordinate} from '../../shared/models';
 
 @Component({
   selector: 'app-home',
@@ -10,31 +11,11 @@ import {DataService} from '../../shared/services/data.service';
 export class HomeComponent implements OnInit {
   @Output() click: EventEmitter<any> = new EventEmitter();
 
-  capitals$: any;
-  capitalsArray: any;
+  public capitals$: Observable<Capital[]>;
+  public weatherOfCapital$: Observable<any>;
 
-  constructor(private data: DataService) { }
-
-  ngOnInit() {
-    this.data.getCapitals().subscribe(
-      data => this.capitals$ = data
-    );
-
-    this.getWeather(this.capitals$);
-  }
-
-
-   async getWeather(obj) {
-      console.log(obj);
-
-    this.capitalsArray = Object.values(obj);
-
-    for (const capital of this.capitalsArray) {
-      const weatherPromise = await fetch(
-        `https://api.darksky.net/forecast/73b864c657473b7ce57d7471f599a2b9/${capital.lat},${capital.long}`);
-        capital.weather = await weatherPromise.json();
-    }
-    console.log(this.capitalsArray);
+   public getWeather(capital: Capital) {
+      this.weatherOfCapital$ = this.dataService.getWeather(capital);
   }
 
   add() {
@@ -45,6 +26,13 @@ export class HomeComponent implements OnInit {
   }
   edit() {
     console.log('edit');
+  }
+
+
+  constructor(private dataService: DataService) { }
+
+  ngOnInit() {
+    this.capitals$ = this.dataService.getCapitals();
   }
 
 }
