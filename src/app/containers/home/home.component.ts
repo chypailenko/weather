@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs';
 import {DataService} from '../../shared/services/data.service';
-import {Capital, Coordinate} from '../../shared/models';
+import {Capital, Coordinate, Weather} from '../../shared/models';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   @Output() click: EventEmitter<any> = new EventEmitter();
 
   public capitals$: Observable<Capital[]>;
-  public weatherOfCapital$: Observable<any>;
+  public weatherOfCapital$: Observable<Weather[]>;
 
    public getWeather(capital: Capital) {
       this.weatherOfCapital$ = this.dataService.getWeather(capital);

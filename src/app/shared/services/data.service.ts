@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Capital} from '../models';
+import {Capital, Weather} from '../models';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 
@@ -20,8 +20,7 @@ export class DataService {
       map(capitalObjToArray)
     );
   }
-
-  public getWeather(capital: Capital): Observable<any> {
-    return this.http.get<any>(`${environment.weatherUrl}/${capital.lat},${capital.long}`);
+  public getWeather(capital: Capital): Observable<Weather[]> {
+    return this.http.get<Weather[]>(`${environment.weatherUrl}/${capital.lat},${capital.long}`);
   }
 }

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as R from 'ramda';
+import {Weather} from '../../shared/models';
 
 @Component({
   selector: 'app-weather-temperature',
@@ -8,7 +9,7 @@ import * as R from 'ramda';
 })
 export class WeatherTemperatureComponent implements OnInit {
   // TODO(Polina): create weather model {currently: {temperature: number}
-  @Input() data: any;
+  @Input() data: Weather[];
 
   get temperature(): number {
     return R.path(['currently', 'temperature'], this.data);
