@@ -35,9 +35,7 @@
       </div>
     </div>
 
-    //popups
 
-    // temperature popup
     <ng-template #temperature>
       <div class="modal-header">
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -55,7 +53,7 @@
     </ng-template>
 
 
-    // additional popup
+
     <ng-template #additional>
       <div class="modal-header">
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -63,12 +61,11 @@
         </button>
       </div>
       <div class="modal-body">
-        bjlbljblj
 
         <div class="add__footer">
           <app-btn (click)="add($event)" class="button button--primary">Save</app-btn>
-          <app-btn (click)="cancel($event)" class="button button--danger">Cancel</app-btn>
         </div>
+
       </div>
     </ng-template>
 

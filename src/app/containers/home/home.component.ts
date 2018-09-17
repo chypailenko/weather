@@ -4,6 +4,7 @@ import {DataService} from '../../shared/services/data.service';
 import {Capital, Coordinate, Weather} from '../../shared/models';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {LocalStorage} from '@ngx-pwa/local-storage';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
   add() {
     console.log('add');
   }
@@ -39,10 +41,10 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private dataService: DataService,
-              private modalService: BsModalService) { }
+              private modalService: BsModalService,
+              protected localStorage: LocalStorage) { }
 
   ngOnInit() {
     this.capitals$ = this.dataService.getCapitals();
-  }
-
-}
+    // this.capitals$ = localStorage.getItem('capitals') || this.dataService.getCapitals();
+}}

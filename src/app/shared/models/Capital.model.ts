@@ -1,5 +1,5 @@
 export class Capital {
-  name: string ;
+  name?: string ;
   capital: string;
   lat: string;
   long: string;
