@@ -1,10 +1,12 @@
 import {NgModule} from '@angular/core';
 import {BtnComponent} from './btn/btn.component';
+import { PopupComponent } from './popup/popup.component';
 
 
 @NgModule ({
   declarations: [
-    BtnComponent
+    BtnComponent,
+    PopupComponent
   ],
   imports: [
   ],

@@ -10,26 +10,67 @@
         </div>
 
 
-      <app-weather-temperature [data]="weatherOfCapital$ | async"></app-weather-temperature>
-
       <div class="row" *ngFor="let item of (capitals$ | async)">
-        <div class="row__item text--16">
+
+        <div class="row__item text--16 choose-status-box">
+          <span class="choose-status-box__container"></span>
           <select>
-              <option value="volvo">visit</option>
-              <option value="saab">want visit</option>
-        </select></div>
-        <div class="row__item text--16" (click)="getWeather(item)">
-          {{item.capital}}
+              <option value="visit" selected>visit</option>
+              <option value="want">want visit</option>
+          </select>
         </div>
+
+        <div class="row__item text--16" (click)="openModal(temperature)">
+          <div class="row__text" (click)="getWeather(item)">{{item.capital}}</div>
+        </div>
+
         <div class="row__item text--16">
           <app-btn (click)="edit($event)" class="button button--primary">Edit</app-btn>
           <app-btn (click)="delete($event)" class="button button--danger">del</app-btn>
         </div>
       </div>
 
-      <div class="home-btn">
-        <app-btn (click)="add($event)" class="button button--default">Add</app-btn>
+      <div class="home-btn" (click)="openModal(additional)">
+        <app-btn class="button button--default">Add</app-btn>
       </div>
     </div>
+
+    //popups
+
+    // temperature popup
+    <ng-template #temperature>
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="temperature">
+          <div class="temperature__title text--24 text--bold">Temperature:</div>
+          <div class="temperature__num">
+            <app-weather-temperature [data]="weatherOfCapital$ | async"></app-weather-temperature>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+
+    // additional popup
+    <ng-template #additional>
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        bjlbljblj
+
+        <div class="add__footer">
+          <app-btn (click)="add($event)" class="button button--primary">Save</app-btn>
+          <app-btn (click)="cancel($event)" class="button button--danger">Cancel</app-btn>
+        </div>
+      </div>
+    </ng-template>
+
   </div>
 </section>
