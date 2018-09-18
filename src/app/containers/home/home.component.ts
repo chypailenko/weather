@@ -45,6 +45,9 @@ export class HomeComponent implements OnInit {
               protected localStorage: LocalStorage) { }
 
   ngOnInit() {
+
     this.capitals$ = this.dataService.getCapitals();
-    // this.capitals$ = localStorage.getItem('capitals') || this.dataService.getCapitals();
+    this.capitals$.subscribe((data: any) => {
+       localStorage.setItem('capitals', JSON.stringify(data));
+    });
 }}
