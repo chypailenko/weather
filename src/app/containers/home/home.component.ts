@@ -5,6 +5,7 @@ import {Capital, Coordinate, Weather} from '../../shared/models';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {LocalStorage} from '@ngx-pwa/local-storage';
+import {DataStorageService} from '../../shared/services/data-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import {LocalStorage} from '@ngx-pwa/local-storage';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  value = '';
   modalRef: BsModalRef;
   @Output() click: EventEmitter<any> = new EventEmitter();
 
@@ -26,28 +27,35 @@ export class HomeComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  add() {
-    console.log('add');
-  }
+  onEnter(value: string) {
+     console.log(value);
+     this.value = value;
+   }
+
   delete() {
     console.log('delete');
   }
   edit() {
     console.log('edit');
   }
-  cancel() {
-    console.log('cancel');
+  save() {
+    console.log('save');
   }
 
 
   constructor(private dataService: DataService,
               private modalService: BsModalService,
-              protected localStorage: LocalStorage) { }
+              protected localStorage: LocalStorage,
+              public dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-
     this.capitals$ = this.dataService.getCapitals();
     this.capitals$.subscribe((data: any) => {
-       localStorage.setItem('capitals', JSON.stringify(data));
+      this.dataStorageService.setData('capitals', JSON.stringify(data));
     });
-}}
+   /* this.capitals$.subscribe((data: any) => {
+      localStorage.setItem('capitals', JSON.stringify(data));
+    });*/
+}
+
+}

@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {Capital, Weather} from '../models';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
+import {DataStorageService} from './data-storage.service';
 
 const capitalObjToArray = (data: Object): Capital[] => Object.values(data);
 
@@ -13,11 +14,13 @@ const capitalObjToArray = (data: Object): Capital[] => Object.values(data);
 
 export class DataService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              public dataStorageService: DataStorageService) { }
 
   public getCapitals(): Observable<Capital[]> {
     if (localStorage.getItem('capitals')) {
-      return of(JSON.parse(localStorage.getItem('capitals')));
+      // return of(JSON.parse(localStorage.getItem('capitals')));
+      return of(this.dataStorageService.getData('capitals'));
     } else {
       return this.http.get<Capital[]>(environment.capitalUrl).pipe(
         map(capitalObjToArray)

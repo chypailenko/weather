@@ -10,12 +10,14 @@
         </div>
 
 
-      <div class="row" *ngFor="let item of (capitals$ | async)">
+      <div class="row"
+           *ngFor="let item of (capitals$ | async)">
+           <!--[ngStyle]="{backgroundColor: value === 'want' ? '#FFCAAF' : '#F1FFC4'}">-->
 
         <div class="row__item text--16 choose-status-box">
           <span class="choose-status-box__container"></span>
           <select>
-              <option value="visit" selected>visit</option>
+              <option value="visit">visit</option>
               <option value="want">want visit</option>
           </select>
         </div>
@@ -61,10 +63,26 @@
         </button>
       </div>
       <div class="modal-body">
+        <form action="#" class="form">
+          <div class="row">
+            <div class="row__item text--16 choose-status-box">
+              <span class="choose-status-box__container"></span>
+              <select>
+                <option value="visit">visit</option>
+                <option value="want">want visit</option>
+              </select>
+            </div>
+            <div class="row__item">
+                <label for="Capital" style="width: 120px">Capital:
+                <input type="text" id="capital" placeholder="" name="capital" class="row__input" #box (keyup.enter)="onEnter(box.value)">
+                </label>
+            </div>
 
-        <div class="add__footer">
-          <app-btn (click)="add($event)" class="button button--primary">Save</app-btn>
-        </div>
+             <div class="add__footer">
+               <button type="submit" (click)="save($event)" class="button button--primary">Save</button>
+            </div>
+          </div>
+        </form>
 
       </div>
     </ng-template>

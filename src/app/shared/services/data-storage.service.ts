@@ -6,17 +6,15 @@ import {LocalStorage} from '@ngx-pwa/local-storage';
 })
 export class DataStorageService {
 
-  // setUser(user): void {
-  //   localStorage.user = JSON.stringify(user);
-  // }
-  //
-  // getUser() {
-  //   return JSON.parse(localStorage.user);
-  // }
-  //
-  // removeDataFromLocalStorage() {
-  //   localStorage.clear();
-  // }
-
   constructor(protected localStorage: LocalStorage) { }
+
+  setData(key, value) {
+    localStorage.setItem(key, value);
+  }
+  getData(key) {
+    return JSON.parse(localStorage.getItem(key))
+  }
+  removeDataFromLocalStorage() {
+    localStorage.clear();
+  }
 }
