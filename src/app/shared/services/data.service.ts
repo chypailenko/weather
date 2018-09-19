@@ -19,7 +19,6 @@ export class DataService {
 
   public getCapitals(): Observable<Capital[]> {
     if (localStorage.getItem('capitals')) {
-      // return of(JSON.parse(localStorage.getItem('capitals')));
       return of(this.dataStorageService.getData('capitals'));
     } else {
       return this.http.get<Capital[]>(environment.capitalUrl).pipe(

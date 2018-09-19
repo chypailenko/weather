@@ -1,10 +1,9 @@
 import {Component, EventEmitter, OnInit, Output, TemplateRef} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import {DataService} from '../../shared/services/data.service';
 import {Capital, Coordinate, Weather} from '../../shared/models';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {LocalStorage} from '@ngx-pwa/local-storage';
 import {DataStorageService} from '../../shared/services/data-storage.service';
 
 @Component({
@@ -27,25 +26,20 @@ export class HomeComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  onEnter(value: string) {
-     console.log(value);
-     this.value = value;
-   }
-
   delete() {
     console.log('delete');
   }
   edit() {
     console.log('edit');
   }
-  save() {
-    console.log('save');
+  save(value: string) {
+    console.log(value);
+    this.value = value;
   }
 
 
   constructor(private dataService: DataService,
               private modalService: BsModalService,
-              protected localStorage: LocalStorage,
               public dataStorageService: DataStorageService) { }
 
   ngOnInit() {
@@ -57,5 +51,4 @@ export class HomeComponent implements OnInit {
       localStorage.setItem('capitals', JSON.stringify(data));
     });*/
 }
-
 }

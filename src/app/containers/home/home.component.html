@@ -63,7 +63,6 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="#" class="form">
           <div class="row">
             <div class="row__item text--16 choose-status-box">
               <span class="choose-status-box__container"></span>
@@ -74,15 +73,15 @@
             </div>
             <div class="row__item">
                 <label for="Capital" style="width: 120px">Capital:
-                <input type="text" id="capital" placeholder="" name="capital" class="row__input" #box (keyup.enter)="onEnter(box.value)">
+                <input type="text" id="capital" placeholder="" name="capital" class="row__input" #box>
+                  {{value}}
                 </label>
             </div>
 
              <div class="add__footer">
-               <button type="submit" (click)="save($event)" class="button button--primary">Save</button>
+               <button type="submit" (click)="save(box.value)" class="button button--primary">Save</button>
             </div>
           </div>
-        </form>
 
       </div>
     </ng-template>
