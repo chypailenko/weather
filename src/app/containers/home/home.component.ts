@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit {
   modalRef: BsModalRef;
   @Output() click: EventEmitter<any> = new EventEmitter();
 
-  public capitals$: Observable<Capital[]>;
+  // public capitals$: Observable<Capital[]>;
+  public capitals$: any[] = [];
   public weatherOfCapital$: Observable<Weather[]>;
 
    public getWeather(capital: Capital) {
@@ -33,8 +34,9 @@ export class HomeComponent implements OnInit {
     console.log('edit');
   }
   add(value: string) {
-    // this.capitals$.push(value);
-    console.log(this.capitals$);
+     console.log(value);
+     console.log(this.capitals$);
+    this.capitals$.push(value);
   }
 
 
@@ -43,10 +45,10 @@ export class HomeComponent implements OnInit {
               public dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-    // this.dataService.getCapitals()
-    //   .subscribe(capitals => {
-    //     this.capitals$ = capitals;
-    //     this.dataStorageService.setData('capitals', JSON.stringify(capitals));
-    //   });
+    this.dataService.getCapitals()
+      .subscribe((capitals: any[]) => {
+        this.capitals$ = capitals;
+        this.dataStorageService.setData('capitals', JSON.stringify(capitals));
+      });
   }
 }
