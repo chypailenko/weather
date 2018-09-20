@@ -32,9 +32,9 @@ export class HomeComponent implements OnInit {
   edit() {
     console.log('edit');
   }
-  save(value: string) {
-    console.log(value);
-    this.value = value;
+  add(value: string) {
+    // this.capitals$.push(value);
+    console.log(this.capitals$);
   }
 
 
@@ -43,12 +43,10 @@ export class HomeComponent implements OnInit {
               public dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-    this.capitals$ = this.dataService.getCapitals();
-    this.capitals$.subscribe((data: any) => {
-      this.dataStorageService.setData('capitals', JSON.stringify(data));
-    });
-   /* this.capitals$.subscribe((data: any) => {
-      localStorage.setItem('capitals', JSON.stringify(data));
-    });*/
-}
+    // this.dataService.getCapitals()
+    //   .subscribe(capitals => {
+    //     this.capitals$ = capitals;
+    //     this.dataStorageService.setData('capitals', JSON.stringify(capitals));
+    //   });
+  }
 }

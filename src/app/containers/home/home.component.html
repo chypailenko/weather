@@ -11,8 +11,8 @@
 
 
       <div class="row"
-           *ngFor="let item of (capitals$ | async)">
-           <!--[ngStyle]="{backgroundColor: value === 'want' ? '#FFCAAF' : '#F1FFC4'}">-->
+           *ngFor="let item of capitals$">
+
 
         <div class="row__item text--16 choose-status-box">
           <span class="choose-status-box__container"></span>
@@ -74,12 +74,11 @@
             <div class="row__item">
                 <label for="Capital" style="width: 120px">Capital:
                 <input type="text" id="capital" placeholder="" name="capital" class="row__input" #box>
-                  {{value}}
                 </label>
             </div>
 
              <div class="add__footer">
-               <button type="submit" (click)="save(box.value)" class="button button--primary">Save</button>
+               <button type="submit" (click)="add(box.value)" class="button button--primary">Save</button>
             </div>
           </div>
 
