@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
 
   delete() {
     console.log('delete');
+    this.dataStorageService.removeItemFromLocalStorage('capitals');
   }
   edit() {
     console.log('edit');
@@ -37,6 +38,10 @@ export class HomeComponent implements OnInit {
      console.log(this.capitals$);
     this.capitals$.push(value);
   }
+  addName() {
+     console.log('click');
+  }
+
   changeColor(value) {
      if (value === 'want') {
        document.getElementById('row').style.backgroundColor = '#F1FFC4';

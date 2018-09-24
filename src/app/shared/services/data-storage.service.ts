@@ -17,4 +17,7 @@ export class DataStorageService {
   removeDataFromLocalStorage() {
     localStorage.clear();
   }
+  removeItemFromLocalStorage(value) {
+    localStorage.removeItem(value);
+  }
 }
