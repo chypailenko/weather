@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, TemplateRef} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, TemplateRef, ViewChild} from '@angular/core';
 import { Observable } from 'rxjs';
 import {DataService} from '../../shared/services/data.service';
 import {Capital, Coordinate, Weather} from '../../shared/models';
@@ -12,7 +12,6 @@ import {DataStorageService} from '../../shared/services/data-storage.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  value = '';
   modalRef: BsModalRef;
   @Output() click: EventEmitter<any> = new EventEmitter();
 
@@ -33,10 +32,18 @@ export class HomeComponent implements OnInit {
   edit() {
     console.log('edit');
   }
-  add(value: string) {
+  add(value: any) {
      console.log(value);
      console.log(this.capitals$);
     this.capitals$.push(value);
+  }
+  changeColor(value) {
+     if (value === 'want') {
+       document.getElementById('row').style.backgroundColor = '#F1FFC4';
+     } else {
+      document.getElementById('row').style.backgroundColor = '#FFCAAF';
+    }
+   this.dataStorageService.setData('status', value);
   }
 
 

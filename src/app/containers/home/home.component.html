@@ -4,19 +4,21 @@
     <div class="weather">
 
         <div class="weather__header row">
-          <div class="weather__value row__item text--24 text--bold">Visited/want visit</div>
+          <div class="weather__value row__item text--24 text--bold">Experience</div>
           <div class="weather__value row__item text--24 text--bold">Capitals</div>
           <div class="weather__value row__item text--24 text--bold">Actions</div>
         </div>
 
 
       <div class="row"
-           *ngFor="let item of capitals$">
+           *ngFor="let item of capitals$"
+      id="row">
 
 
         <div class="row__item text--16 choose-status-box">
           <span class="choose-status-box__container"></span>
-          <select>
+          <select (change)="changeColor($event.target.value)">
+              <option value="select" selected>select</option>
               <option value="visit">visit</option>
               <option value="want">want visit</option>
           </select>
@@ -64,17 +66,10 @@
       </div>
       <div class="modal-body">
           <div class="row">
-            <div class="row__item text--16 choose-status-box">
-              <span class="choose-status-box__container"></span>
-              <select>
-                <option value="visit">visit</option>
-                <option value="want">want visit</option>
-              </select>
-            </div>
             <div class="row__item">
-                <label for="Capital" style="width: 120px">Capital:
+              <label for="Capital" style="width: 120px">Capital:
                 <input type="text" id="capital" placeholder="" name="capital" class="row__input" #box>
-                </label>
+              </label>
             </div>
 
              <div class="add__footer">
