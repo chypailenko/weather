@@ -12,11 +12,11 @@
 
       <div class="row"
            *ngFor="let item of capitals$"
-      id="row">
+      id="row" [ngClass]="{visited: item.is_visited, wanted: item.is_wanted}">
 
         <div class="row__item text--16 choose-status-box">
           <span class="choose-status-box__container"></span>
-            <select (change)="changeColor($event.target.value)">
+            <select (change)="changeColor($event.target.value, item)">
               <option value="select" selected>select</option>
               <option value="{{option}}" *ngFor="let option of options">{{option}}</option>
             </select>

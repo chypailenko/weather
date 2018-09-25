@@ -12,7 +12,7 @@ import {DataStorageService} from '../../shared/services/data-storage.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  options = ['visited', 'want'];
+  options = ['is_visited', 'is_wanted'];
   modalRef: BsModalRef;
   @Output() click: EventEmitter<any> = new EventEmitter();
 
@@ -43,15 +43,24 @@ export class HomeComponent implements OnInit {
      console.log('click');
   }
 
-  changeColor(value) {
-    console.log(this.options);
-    console.log(value);
-      if (value === 'want') {
-        document.getElementById('row').style.backgroundColor = '#F1FFC4';
-      } else {
-        document.getElementById('row').style.backgroundColor = '#FFCAAF';
+  changeColor(value, capital) {
+      capital.is_visited = false;
+      capital.is_wanted = false;
+      if(value !== 'select') {
+        capital[value] = true;
       }
-    this.dataStorageService.setData('status', value);
+
+     // console.log(capital);
+     // console.log(value);
+     // return;
+    // console.log(this.options);
+    // console.log(value);
+    //   if (value === 'want') {
+    //     document.getElementById('row').style.backgroundColor = '#F1FFC4';
+    //   } else {
+    //     document.getElementById('row').style.backgroundColor = '#FFCAAF';
+    //   }
+    // this.dataStorageService.setData('status', value);
     }
 
 
@@ -62,7 +71,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.dataService.getCapitals()
       .subscribe((capitals: any[]) => {
-        this.capitals$ = capitals;
+        this.capitals$ = capitals.map(el => {
+          el.is_visited = false;
+          el.is_wanted = false;
+          return el;
+        });
         this.dataStorageService.setData('capitals', JSON.stringify(capitals));
       });
   }
