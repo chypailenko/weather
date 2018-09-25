@@ -16,11 +16,10 @@
 
         <div class="row__item text--16 choose-status-box">
           <span class="choose-status-box__container"></span>
-          <select (change)="changeColor($event.target.value)">
+            <select (change)="changeColor($event.target.value)">
               <option value="select" selected>select</option>
-              <option value="visit">visit</option>
-              <option value="want">want visit</option>
-          </select>
+              <option value="{{option}}" *ngFor="let option of options">{{option}}</option>
+            </select>
         </div>
 
         <div class="row__item text--16" (click)="openModal(temperature)">

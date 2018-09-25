@@ -12,6 +12,7 @@ import {DataStorageService} from '../../shared/services/data-storage.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  options = ['visited', 'want'];
   modalRef: BsModalRef;
   @Output() click: EventEmitter<any> = new EventEmitter();
 
@@ -43,13 +44,15 @@ export class HomeComponent implements OnInit {
   }
 
   changeColor(value) {
-     if (value === 'want') {
-       document.getElementById('row').style.backgroundColor = '#F1FFC4';
-     } else {
-      document.getElementById('row').style.backgroundColor = '#FFCAAF';
+    console.log(this.options);
+    console.log(value);
+      if (value === 'want') {
+        document.getElementById('row').style.backgroundColor = '#F1FFC4';
+      } else {
+        document.getElementById('row').style.backgroundColor = '#FFCAAF';
+      }
+    this.dataStorageService.setData('status', value);
     }
-   this.dataStorageService.setData('status', value);
-  }
 
 
   constructor(private dataService: DataService,
