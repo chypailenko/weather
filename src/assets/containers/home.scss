@@ -86,16 +86,9 @@
   justify-content: space-around;
 }
 
-.red {
-  background-color: red;
-}
-.blue {
-  background-color: blue;
-}
-
 .visited {
-  background-color: grey;
+  background-color: $yellow;
 }
 .wanted {
-  background-color: yellow;
+  background-color: $apricot;
 }

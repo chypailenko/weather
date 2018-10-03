@@ -46,21 +46,10 @@ export class HomeComponent implements OnInit {
   changeColor(value, capital) {
       capital.is_visited = false;
       capital.is_wanted = false;
-      if(value !== 'select') {
+      if (value !== 'select') {
         capital[value] = true;
       }
-
-     // console.log(capital);
-     // console.log(value);
-     // return;
-    // console.log(this.options);
-    // console.log(value);
-    //   if (value === 'want') {
-    //     document.getElementById('row').style.backgroundColor = '#F1FFC4';
-    //   } else {
-    //     document.getElementById('row').style.backgroundColor = '#FFCAAF';
-    //   }
-    // this.dataStorageService.setData('status', value);
+      console.log(value, capital);
     }
 
 
