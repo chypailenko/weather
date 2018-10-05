@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   options = ['is_visited', 'is_wanted'];
   modalRef: BsModalRef;
   @Output() click: EventEmitter<any> = new EventEmitter();
+/*  @ViewChild('newCity') newCityRef: ElementRef;
+  @Output() cityAdded = new EventEmitter<Capital>();*/
 
   // public capitals$: Observable<Capital[]>;
   public capitals$: any[] = [];
@@ -34,14 +36,23 @@ export class HomeComponent implements OnInit {
   edit() {
     console.log('edit');
   }
-  add(value: any) {
+  addCity(value: any) {
      console.log(value);
      console.log(this.capitals$);
-    this.capitals$.push(value);
+    this.capitals$.push({capital: value});
   }
-  addName() {
-     console.log('click');
+
+  /*addCity() {
+    const inputCity = this.newCityRef.nativeElement.value;
+    console.log(inputCity);
+    const newCity = new Capital();
+    console.log(newCity);
+    this.cityAdded.emit(newCity);
   }
+  onCityAdded(capitals: Capital) {
+    console.log(capitals);
+    this.capitals$.push(capitals);
+  }*/
 
   changeColor(value, capital) {
       capital.is_visited = false;

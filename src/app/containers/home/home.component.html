@@ -32,6 +32,10 @@
         </div>
       </div>
 
+
+    <!--  <div (cityAdded)="onCityAdded($event)"></div>-->
+
+
       <div class="home-btn" (click)="openModal(additional)">
         <app-btn class="button button--default">Add</app-btn>
       </div>
@@ -63,15 +67,21 @@
         </button>
       </div>
       <div class="modal-body">
-          <div class="row">
+          <div class="row row__modal">
             <div class="row__item">
               <label for="Capital" style="width: 120px">Capital:
-                <input type="text" id="capital" placeholder="" name="capital" class="row__input" #box>
+                <input type="text" id="capital" placeholder="" name="capital" class="row__input" #newCity>
               </label>
+              <!--<label for="Lat" style="width: 120px">Lat:
+                <input type="text" id="lat" placeholder="" name="lat" class="row__input" #newCity>
+              </label>
+              <label for="Long" style="width: 120px">Long:
+                <input type="text" id="long" placeholder="" name="long" class="row__input" #newCity>
+              </label>-->
             </div>
 
              <div class="add__footer">
-               <button type="submit" (click)="add(box.value)" class="button button--primary">Save</button>
+               <button type="submit" (click)="addCity(newCity.value)" class="button button--primary">Save</button>
             </div>
           </div>
       </div>

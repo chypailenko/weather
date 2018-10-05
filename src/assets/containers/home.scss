@@ -45,6 +45,9 @@
   &:hover {
     box-shadow: 0 2px 6px #73778e;
   }
+  &__modal {
+    height: 100%;
+  }
   &__item {
     cursor: pointer;
   }
