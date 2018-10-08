@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
               private modalService: BsModalService,
               public dataStorageService: DataStorageService) { }
 
-  ngOnInit() {
+/*  ngOnInit() {
     this.dataService.getCapitals()
       .subscribe((capitals: any[]) => {
         this.capitals$ = capitals.map(el => {
@@ -79,5 +79,12 @@ export class HomeComponent implements OnInit {
         });
         // this.dataStorageService.setData('capitals', JSON.stringify(capitals));
       });
-  }
+  }*/
+  ngOnInit() {
+    this.dataService.getCapitals()
+      .subscribe((capitals: any[]) => {
+        this.capitals$ = capitals;
+        this.dataStorageService.setData('capitals', JSON.stringify(capitals));
+      });
+}
 }
