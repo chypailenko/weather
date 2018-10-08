@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
   delete() {
     console.log('delete');
-    this.dataStorageService.removeItemFromLocalStorage('capitals');
+    this.dataStorageService.removeItemFromLocalStorage('capitals{value}');
   }
   edit() {
     console.log('edit');
@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
      console.log(value);
      console.log(this.capitals$);
     this.capitals$.push({capital: value});
+    this.dataStorageService.setData('capitals', JSON.stringify(this.capitals$));
   }
 
   /*addCity() {
@@ -60,7 +61,7 @@ export class HomeComponent implements OnInit {
       if (value !== 'select') {
         capital[value] = true;
       }
-      console.log(value, capital);
+      this.dataStorageService.setData('capitals', JSON.stringify(this.capitals$));
     }
 
 
@@ -76,7 +77,7 @@ export class HomeComponent implements OnInit {
           el.is_wanted = false;
           return el;
         });
-        this.dataStorageService.setData('capitals', JSON.stringify(capitals));
+        // this.dataStorageService.setData('capitals', JSON.stringify(capitals));
       });
   }
 }
