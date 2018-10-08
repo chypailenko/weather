@@ -31,7 +31,8 @@ export class HomeComponent implements OnInit {
 
   delete() {
     console.log('delete');
-    this.dataStorageService.removeItemFromLocalStorage('capitals{value}');
+    const item = this.dataStorageService.getData('capitals');
+    console.log(item.capital);
   }
   edit() {
     console.log('edit');
