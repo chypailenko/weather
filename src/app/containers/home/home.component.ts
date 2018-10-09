@@ -1,25 +1,26 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, TemplateRef, ViewChild} from '@angular/core';
-import { Observable } from 'rxjs';
+import {Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, Renderer2, TemplateRef, ViewChild} from '@angular/core';
+import {fromEvent, Observable, Subject} from 'rxjs';
 import {DataService} from '../../shared/services/data.service';
-import {Capital, Coordinate, Weather} from '../../shared/models';
+import {Capital, Coordinate, Mark, Weather} from '../../shared/models';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {DataStorageService} from '../../shared/services/data-storage.service';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-  options = ['is_visited', 'is_wanted'];
+export class HomeComponent implements OnInit,  OnDestroy {
+  options = ['visit', 'want'];
   modalRef: BsModalRef;
+  destroy$: Subject<boolean> = new Subject<boolean>();
   @Output() click: EventEmitter<any> = new EventEmitter();
-/*  @ViewChild('newCity') newCityRef: ElementRef;
-  @Output() cityAdded = new EventEmitter<Capital>();*/
 
-  // public capitals$: Observable<Capital[]>;
-  public capitals$: any[] = [];
+  public capitals$: Observable<Capital[]> = this.dataService.getCapitals();
+  public capitals: Capital[];
+
   public weatherOfCapital$: Observable<Weather[]>;
 
    public getWeather(capital: Capital) {
@@ -32,37 +33,26 @@ export class HomeComponent implements OnInit {
   delete() {
     console.log('delete');
     const item = this.dataStorageService.getData('capitals');
-    console.log(item.capital);
+    // console.log(item.capital);
   }
   edit() {
     console.log('edit');
   }
-  addCity(value: any) {
-     console.log(value);
-     console.log(this.capitals$);
-    this.capitals$.push({capital: value});
-    this.dataStorageService.setData('capitals', JSON.stringify(this.capitals$));
+
+  addCity(value: string) {
+    const newCapital = new Capital().create({capital: value});
+    this.capitals.push(newCapital);
+    this.dataStorageService.setData('capitals', this.capitals);
   }
 
-  /*addCity() {
-    const inputCity = this.newCityRef.nativeElement.value;
-    console.log(inputCity);
-    const newCity = new Capital();
-    console.log(newCity);
-    this.cityAdded.emit(newCity);
+  getItemByKey(value: string, key: string, data: any[]): any {
+    const [res] = data.filter((item) => item[key].toLocaleLowerCase() === value.toLocaleLowerCase());
+    return res;
   }
-  onCityAdded(capitals: Capital) {
-    console.log(capitals);
-    this.capitals$.push(capitals);
-  }*/
 
-  changeColor(value, capital) {
-      capital.is_visited = false;
-      capital.is_wanted = false;
-      if (value !== 'select') {
-        capital[value] = true;
-      }
-      this.dataStorageService.setData('capitals', JSON.stringify(this.capitals$));
+  changeColor(value: Mark, capital: Capital) {
+    capital.mark = value;
+      // this.dataStorageService.setData('capitals', JSON.stringify());
     }
 
 
@@ -70,22 +60,19 @@ export class HomeComponent implements OnInit {
               private modalService: BsModalService,
               public dataStorageService: DataStorageService) { }
 
-/*  ngOnInit() {
-    this.dataService.getCapitals()
-      .subscribe((capitals: any[]) => {
-        this.capitals$ = capitals.map(el => {
-          el.is_visited = false;
-          el.is_wanted = false;
-          return el;
-        });
-        // this.dataStorageService.setData('capitals', JSON.stringify(capitals));
-      });
-  }*/
+
   ngOnInit() {
-    this.dataService.getCapitals()
-      .subscribe((capitals: any[]) => {
-        this.capitals$ = capitals;
-        this.dataStorageService.setData('capitals', JSON.stringify(capitals));
-      });
+    this.capitals$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((capitals: Capital[]) => {
+      this.capitals = capitals;
+      this.dataStorageService.setData('capitals', capitals);
+    });
 }
+
+ngOnDestroy() {
+  this.destroy$.next();
+  this.destroy$.unsubscribe();
+}
+
 }

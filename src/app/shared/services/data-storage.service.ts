@@ -9,9 +9,9 @@ export class DataStorageService {
   constructor(protected localStorage: LocalStorage) { }
 
   setData(key, value) {
-    localStorage.setItem(key, value);
+    localStorage.setItem(key, JSON.stringify(value));
   }
-  getData(key) {
+  getData(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
   removeDataFromLocalStorage() {

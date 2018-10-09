@@ -7,6 +7,12 @@ import {map} from 'rxjs/operators';
 import {DataStorageService} from './data-storage.service';
 
 const capitalObjToArray = (data: Object): Capital[] => Object.values(data);
+const addKeyToObj = (data: Capital[]): Capital[] => {
+  return data.map((obj: Capital) => {
+    obj['mark'] = 'none';
+    return obj;
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +28,8 @@ export class DataService {
       return of(this.dataStorageService.getData('capitals'));
     } else {
       return this.http.get<Capital[]>(environment.capitalUrl).pipe(
-        map(capitalObjToArray)
+        map(capitalObjToArray),
+        map(addKeyToObj)
       );
     }
   }
