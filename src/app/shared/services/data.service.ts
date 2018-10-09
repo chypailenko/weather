@@ -11,7 +11,7 @@ const addKeyToObj = (data: Capital[]): Capital[] => {
   return data.map((obj: Capital) => {
     obj['mark'] = 'none';
     return obj;
-  })
+  });
 };
 
 @Injectable({

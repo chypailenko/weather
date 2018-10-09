@@ -12,8 +12,7 @@
 
       <div class="row"
            *ngFor="let item of capitals"
-      id="row" [ngClass]="{visited: item.mark === 'visit', wanted: item.mark === 'want' }">
-        {{item.mark}}
+      id="row" [ngClass]="{visited: item.mark === 'visit', wanted: item.mark === 'want'}">
         <div class="row__item text--16 choose-status-box">
           <span class="choose-status-box__container"></span>
             <select (change)="changeColor($event.target.value, item)">

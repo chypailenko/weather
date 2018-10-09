@@ -32,8 +32,6 @@ export class HomeComponent implements OnInit,  OnDestroy {
 
   delete() {
     console.log('delete');
-    const item = this.dataStorageService.getData('capitals');
-    // console.log(item.capital);
   }
   edit() {
     console.log('edit');
@@ -52,7 +50,7 @@ export class HomeComponent implements OnInit,  OnDestroy {
 
   changeColor(value: Mark, capital: Capital) {
     capital.mark = value;
-      // this.dataStorageService.setData('capitals', JSON.stringify());
+    this.dataStorageService.setData('capitals', this.capitals);
     }
 
 
