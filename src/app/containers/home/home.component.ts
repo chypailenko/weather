@@ -30,8 +30,10 @@ export class HomeComponent implements OnInit,  OnDestroy {
     this.modalRef = this.modalService.show(template);
   }
 
-  delete() {
+  delete(item) {
     console.log('delete');
+    console.log(item);
+    const tempItem = item;
   }
   edit() {
     console.log('edit');
