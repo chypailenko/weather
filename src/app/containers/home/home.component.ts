@@ -31,9 +31,11 @@ export class HomeComponent implements OnInit,  OnDestroy {
   }
 
   delete(item) {
-    console.log('delete');
-    console.log(item);
-    const tempItem = item;
+    const index = this.capitals.indexOf(item, 0);
+    if (index > -1) {
+      this.capitals.splice(index, 1);
+    }
+    this.dataStorageService.setData('capitals', this.capitals);
   }
 
   addCity(value: string) {
