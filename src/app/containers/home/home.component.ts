@@ -29,19 +29,22 @@ export class HomeComponent implements OnInit,  OnDestroy {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+  setNewData() {
+    this.dataStorageService.setData('capitals', this.capitals);
+  }
 
   delete(item) {
     const index = this.capitals.indexOf(item, 0);
     if (index > -1) {
       this.capitals.splice(index, 1);
     }
-    this.dataStorageService.setData('capitals', this.capitals);
+    this.setNewData();
   }
 
   addCity(value: string) {
     const newCapital = new Capital().create({capital: value});
     this.capitals.push(newCapital);
-    this.dataStorageService.setData('capitals', this.capitals);
+    this.setNewData();
   }
 
   getItemByKey(value: string, key: string, data: any[]): any {
@@ -51,7 +54,7 @@ export class HomeComponent implements OnInit,  OnDestroy {
 
   changeColor(value: Mark, capital: Capital) {
     capital.mark = value;
-    this.dataStorageService.setData('capitals', this.capitals);
+    this.setNewData();
     }
 
 
