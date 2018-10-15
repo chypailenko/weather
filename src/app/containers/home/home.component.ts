@@ -35,9 +35,6 @@ export class HomeComponent implements OnInit,  OnDestroy {
     console.log(item);
     const tempItem = item;
   }
-  edit() {
-    console.log('edit');
-  }
 
   addCity(value: string) {
     const newCapital = new Capital().create({capital: value});
