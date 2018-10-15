@@ -40,6 +40,10 @@ export class HomeComponent implements OnInit,  OnDestroy {
     }
     this.setNewData();
   }
+  // edit(item) {
+  //   console.log('edit');
+  //   console.log(item);
+  // }
 
   addCity(value: string) {
     const newCapital = new Capital().create({capital: value});
