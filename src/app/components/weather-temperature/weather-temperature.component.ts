@@ -8,7 +8,6 @@ import {Weather} from '../../shared/models';
   styleUrls: ['./weather-temperature.component.scss']
 })
 export class WeatherTemperatureComponent implements OnInit {
-  // TODO(Polina): create weather model {currently: {temperature: number}
   @Input() data: Weather[];
 
   get temperature(): number {
